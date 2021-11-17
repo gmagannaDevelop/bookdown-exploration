@@ -1,6 +1,9 @@
 --- 
-title: "A Minimal Book Example"
-author: "Yihui Xie"
+title: "D I F F R N A : A RNA-Seq analysis pipeline"
+author: 
+  - Izem Mouhoubi
+  - Théo Roncalli
+  - Gustavo Magaña López
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
