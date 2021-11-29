@@ -5,28 +5,29 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>D I F F R N A : A RNA-Seq analysis pipeline</title>
-  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="description" content="Documentation for the NEXTFLOW pipeline ‘DIFFRNA’ v0.1.0" />
   <meta name="generator" content="bookdown 0.22.3 and GitBook 2.6.7" />
 
   <meta property="og:title" content="D I F F R N A : A RNA-Seq analysis pipeline" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta property="og:description" content="Documentation for the NEXTFLOW pipeline ‘DIFFRNA’ v0.1.0" />
   <meta name="github-repo" content="gmagannaDevelop/bookdown-exploration" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="D I F F R N A : A RNA-Seq analysis pipeline" />
   
-  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="twitter:description" content="Documentation for the NEXTFLOW pipeline ‘DIFFRNA’ v0.1.0" />
   
 
 <meta name="author" content="Izem Mouhoubi" />
 <meta name="author" content="Théo Roncalli" />
 <meta name="author" content="Gustavo Magaña López" />
+<meta name="author" content="Alex Westbrook" />
 
 
-<meta name="date" content="2021-11-17" />
+<meta name="date" content="2021-11-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -161,7 +162,12 @@ div.csl-indent {
 <li><a href="./">A Minimal Book Example</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#hardware-and-operating-system"><i class="fa fa-check"></i><b>1.1</b> Hardware and Operating System</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#biopipes-a-biosphere-commons-app"><i class="fa fa-check"></i><b>1.2</b> BioPipes: a Biosphere-commons app</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#software"><i class="fa fa-check"></i><b>1.3</b> Software</a></li>
+</ul></li>
 <li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
 <li class="chapter" data-level="3" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>3</b> Literature</a></li>
 <li class="chapter" data-level="4" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>4</b> Methods</a>
@@ -200,18 +206,59 @@ div.csl-indent {
 <p class="author"><em>Izem Mouhoubi</em></p>
 <p class="author"><em>Théo Roncalli</em></p>
 <p class="author"><em>Gustavo Magaña López</em></p>
-<p class="date" style="margin-top: 1.5em;"><em>2021-11-17</em></p>
+<p class="author"><em>Alex Westbrook</em></p>
+<p class="date" style="margin-top: 1.5em;"><em>2021-11-29</em></p>
 </div>
 <div id="prerequisites" class="section level1" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Prerequisites</h1>
-<p>This is a <em>sample</em> book written in <strong>Markdown</strong>. You can use anything that Pandoc’s Markdown supports, e.g., a math equation <span class="math inline">\(a^2 + b^2 = c^2\)</span>.</p>
-<p>The <strong>bookdown</strong> package can be installed from CRAN or Github:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)</span>
-<span id="cb1-2"><a href="index.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># or the development version</span></span>
-<span id="cb1-3"><a href="index.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;rstudio/bookdown&quot;)</span></span></code></pre></div>
-<p>Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading <code>#</code>.</p>
-<p>To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <a href="https://yihui.name/tinytex/" class="uri">https://yihui.name/tinytex/</a>.</p>
+<div id="hardware-and-operating-system" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Hardware and Operating System</h2>
+<p>The pipeline was developed and tested on <a href="https://fridge.ubuntu.com/2021/08/27/ubuntu-20-04-3-lts-released/">Ubuntu 20.04.3 LTS</a>
+on top of the <code>(GNU/Linux 5.4.0-88-generic x86_64)</code> kernel. The output of the commands <code>uname</code> and <code>neofetch</code> are provided to further detail our configuration.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> uname <span class="at">-a</span></span>
+<span id="cb1-2"><a href="index.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Linux</span> machine329a7396-059f-41aa-94c7-4c41b4ec8290 5.4.0-88-generic <span class="co">#99-Ubuntu SMP Thu Sep 23 17:29:00 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux</span></span>
+<span id="cb1-3"><a href="index.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="index.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> neofetch</span>
+<span id="cb1-5"><a href="index.html#cb1-5" aria-hidden="true" tabindex="-1"></a>            <span class="ex">.-/+oossssoo+/-.</span>               ubuntu@machine3f9ae3dc-6a4d-46b7-8131-04f00a1be146 </span>
+<span id="cb1-6"><a href="index.html#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="kw">`</span><span class="bu">:</span>+ssssssssssssssssss+:<span class="kw">`</span>           <span class="at">--------------------------------------------------</span> </span>
+<span id="cb1-7"><a href="index.html#cb1-7" aria-hidden="true" tabindex="-1"></a>      <span class="ex">-+ssssssssssssssssssyyssss+-</span>         OS: Ubuntu 20.04.3 LTS x86_64 </span>
+<span id="cb1-8"><a href="index.html#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="ex">.ossssssssssssssssssdMMMNysssso.</span>       Host: OpenStack Compute 18.2.1-1.el7 </span>
+<span id="cb1-9"><a href="index.html#cb1-9" aria-hidden="true" tabindex="-1"></a>   <span class="ex">/ssssssssssshdmmNNmmyNMMMMhssssss/</span>      Kernel: 5.4.0-88-generic </span>
+<span id="cb1-10"><a href="index.html#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="ex">+ssssssssshmydMMMMMMMNddddyssssssss+</span>     Uptime: 13 hours, 14 mins </span>
+<span id="cb1-11"><a href="index.html#cb1-11" aria-hidden="true" tabindex="-1"></a> <span class="ex">/sssssssshNMMMyhhyyyyhmNMMMNhssssssss/</span>    Packages: 719 <span class="er">(</span><span class="ex">dpkg</span><span class="kw">)</span><span class="ex">,</span> 4 <span class="er">(</span><span class="ex">snap</span><span class="kw">)</span> </span>
+<span id="cb1-12"><a href="index.html#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ex">.ssssssssdMMMNhsssssssssshNMMMdssssssss.</span>   Shell: bash 5.0.17 </span>
+<span id="cb1-13"><a href="index.html#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ex">+sssshhhyNMMNyssssssssssssyNMMMysssssss+</span>   Theme: Adwaita [GTK3] </span>
+<span id="cb1-14"><a href="index.html#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ex">ossyNMMMNyMMhsssssssssssssshmmmhssssssso</span>   Icons: Adwaita [GTK3] </span>
+<span id="cb1-15"><a href="index.html#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ex">ossyNMMMNyMMhsssssssssssssshmmmhssssssso</span>   Terminal: /dev/pts/0 </span>
+<span id="cb1-16"><a href="index.html#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="ex">+sssshhhyNMMNyssssssssssssyNMMMysssssss+</span>   CPU: Intel <span class="er">(</span><span class="ex">Haswell,</span> no TSX, IBRS<span class="kw">)</span> <span class="kw">(</span><span class="ex">16</span><span class="kw">)</span> <span class="ex">@</span> 2.294GHz </span>
+<span id="cb1-17"><a href="index.html#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="ex">.ssssssssdMMMNhsssssssssshNMMMdssssssss.</span>   GPU: 00:02.0 Cirrus Logic GD 5446 </span>
+<span id="cb1-18"><a href="index.html#cb1-18" aria-hidden="true" tabindex="-1"></a> <span class="ex">/sssssssshNMMMyhhyyyyhdNMMMNhssssssss/</span>    Memory: 635MiB / 64323MiB </span>
+<span id="cb1-19"><a href="index.html#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="ex">+sssssssssdmydMMMMMMMMddddyssssssss+</span></span>
+<span id="cb1-20"><a href="index.html#cb1-20" aria-hidden="true" tabindex="-1"></a>   <span class="ex">/ssssssssssshdmNNNNmyNMMMMhssssss/</span>                              </span>
+<span id="cb1-21"><a href="index.html#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="ex">.ossssssssssssssssssdMMMNysssso.</span>                               </span>
+<span id="cb1-22"><a href="index.html#cb1-22" aria-hidden="true" tabindex="-1"></a>      <span class="ex">-+sssssssssssssssssyyyssss+-</span></span>
+<span id="cb1-23"><a href="index.html#cb1-23" aria-hidden="true" tabindex="-1"></a>        <span class="kw">`</span><span class="bu">:</span>+ssssssssssssssssss+:<span class="kw">`</span></span>
+<span id="cb1-24"><a href="index.html#cb1-24" aria-hidden="true" tabindex="-1"></a>            <span class="ex">.-/+oossssoo+/-.</span></span></code></pre></div>
+<p>This configuration was actually a virtual machine hosted on <a href="https://biosphere.france-bioinformatique.fr/catalogue/">Biosphere’s RAINBio</a> a cloud service maintained by the French Institue of Bioinformatics (<a href="https://www.france-bioinformatique.fr/en/home/"><em>Institut Français de Bioinformatique</em></a>).</p>
+</div>
+<div id="biopipes-a-biosphere-commons-app" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> BioPipes: a Biosphere-commons app</h2>
+<p>The instance of the virtual machine we used is called <a href="https://biosphere.france-bioinformatique.fr/catalogue/appliance/119/"><em>BioPipes</em></a>. It provides the most notable bioinformatics pipeline tools:</p>
+<ul>
+<li><a href="https://www.nextflow.io/">nextflow</a></li>
+<li><a href="https://snakemake.github.io/">snakemake</a></li>
+<li><a href="https://www.commonwl.org/">cwltool</a></li>
+</ul>
+</div>
+<div id="software" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Software</h2>
+<p>Our pipeline is built on top of <code>nextflow</code>, which was installed via the <a href="https://www.anaconda.com/products/individual">conda</a> package manager.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="index.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> conda <span class="at">--version</span></span>
+<span id="cb2-2"><a href="index.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> 4.11.0</span>
+<span id="cb2-3"><a href="index.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> nextflow <span class="at">-v</span></span>
+<span id="cb2-4"><a href="index.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> version 21.10.0.5640</span></code></pre></div>
 
+</div>
 </div>
             </section>
 
